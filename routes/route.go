@@ -12,26 +12,35 @@ func HandleRoutes() {
 	route.Use()
 
 	//tipoClientes
-	route.POST("/api/v1/tiposcliente", controllers.InsereTipoCliente)
-	route.GET("/api/v1/tiposcliente", controllers.BuscaTodosTipoCliente)
-	route.GET("/api/v1/tiposcliente/:id", controllers.BuscaTipoClientePorID)
-	route.DELETE("/api/v1/tiposcliente/:id", controllers.ApagaTipoCliente)
-	route.PATCH("/api/v1/tiposcliente/:id", controllers.AlteraTipoCliente)
+	tiposCliente := route.Group("api/v1/tiposcliente")
+	{
+		tiposCliente.POST("/", controllers.InsereTipoCliente)
+		tiposCliente.GET("/", controllers.BuscaTodosTipoCliente)
+		tiposCliente.GET("/:id", controllers.BuscaTipoClientePorID)
+		tiposCliente.DELETE("/:id", controllers.ApagaTipoCliente)
+		tiposCliente.PATCH("/:id", controllers.AlteraTipoCliente)
+	}
 
 	//clientes
-	route.POST("api/v1/clientes", controllers.InsereCliente)
-	route.GET("api/v1/clientes", controllers.BuscaTodosClientes)
-	route.GET("api/v1/clientes/:id", controllers.BuscaClientePorID)
-	route.DELETE("api/v1/clientes/:id", controllers.ApagaClientePorID)
-	route.PATCH("api/v1/clientes/:id", controllers.AlteraClientePorID)
+	clientes := route.Group("api/v1/clientes")
+	{
+		clientes.POST("/", controllers.InsereCliente)
+		clientes.GET("/", controllers.BuscaTodosClientes)
+		clientes.GET("/:id", controllers.BuscaClientePorID)
+		clientes.DELETE("/:id", controllers.ApagaClientePorID)
+		clientes.PATCH("/:id", controllers.AlteraClientePorID)
+	}
 
 	//dependentes
-	route.POST("api/v1/dependentes", controllers.InsereDependente)
-	route.GET("api/v1/dependentes", controllers.BuscaTodosDependentes)
-	route.GET("api/v1/dependentes/:id", controllers.BuscaDependentePorID)
-	route.GET("api/v1/dependentes/cliente/:clienteid", controllers.BuscaDependentePorCliente)
-	route.DELETE("api/v1/dependentes/:id", controllers.ApagaDependentePorID)
-	route.PATCH("api/v1/dependentes/:id", controllers.AlteraDependentePorID)
+	dependentes := route.Group("api/v1/dependentes")
+	{
+		dependentes.POST("/", controllers.InsereDependente)
+		dependentes.GET("/", controllers.BuscaTodosDependentes)
+		dependentes.GET("/:id", controllers.BuscaDependentePorID)
+		dependentes.GET("/cliente/:clienteid", controllers.BuscaDependentePorCliente)
+		dependentes.DELETE("/:id", controllers.ApagaDependentePorID)
+		dependentes.PATCH("/:id", controllers.AlteraDependentePorID)
+	}
 
 	route.Run() // listen and serve on localhost:8080
 
