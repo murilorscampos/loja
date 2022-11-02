@@ -9,8 +9,6 @@ func HandleRoutes() {
 
 	route := gin.Default()
 
-	route.Use()
-
 	//tipoClientes
 	tiposCliente := route.Group("api/v1/tiposcliente")
 	{
