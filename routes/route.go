@@ -12,8 +12,8 @@ func HandleRoutes() {
 	//tipoClientes
 	tiposCliente := route.Group("api/v1/tiposcliente")
 	{
-		tiposCliente.POST("/", controllers.InsereTipoCliente)
-		tiposCliente.GET("/", controllers.BuscaTodosTipoCliente)
+		tiposCliente.POST("", controllers.InsereTipoCliente)
+		tiposCliente.GET("", controllers.BuscaTodosTipoCliente)
 		tiposCliente.GET("/:id", controllers.BuscaTipoClientePorID)
 		tiposCliente.DELETE("/:id", controllers.ApagaTipoCliente)
 		tiposCliente.PATCH("/:id", controllers.AlteraTipoCliente)
@@ -32,8 +32,8 @@ func HandleRoutes() {
 	//dependentes
 	dependentes := route.Group("api/v1/dependentes")
 	{
-		dependentes.POST("/", controllers.InsereDependente)
-		dependentes.GET("/", controllers.BuscaTodosDependentes)
+		dependentes.POST("", controllers.InsereDependente)
+		dependentes.GET("", controllers.BuscaTodosDependentes)
 		dependentes.GET("/:id", controllers.BuscaDependentePorID)
 		dependentes.GET("/cliente/:clienteid", controllers.BuscaDependentePorCliente)
 		dependentes.DELETE("/:id", controllers.ApagaDependentePorID)
